@@ -9,8 +9,8 @@ tcpCliSock = socket(AF_INET, SOCK_STREAM)
 tcpCliSock.connect(ADDR)
 
 while True:
-    print('请按照格式输入：GET filename or POST filename xxxxxx')
-    msg = input('请输入：')
+    print('璇锋寜鐓ф牸寮忚緭鍏ワ細GET filename or POST filename xxxxxx')
+    msg = input('璇疯緭鍏ワ細')
     tcpCliSock.send(msg.encode())
     data = tcpCliSock.recv(BUFSIZ)
     if not data:
