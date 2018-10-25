@@ -1,19 +1,19 @@
 from socket import *
 
-HOST = '127.0.0.1'
-PORT = 9000
-BUFSIZ = 1024
-ADDR = (HOST, PORT)
+host = '127.0.0.1'  #本地服务器地址
+port = 12345  #客户端端口(确保和服务器的端口一致
+bufsiz = 2048 #缓存大小
+addc = (host, port) #地址+端口
 
-tcpCliSock = socket(AF_INET, SOCK_STREAM)
-tcpCliSock.connect(ADDR)
+udpclisock = socket(AF_INET, SOCK_DGRAM)  #创建UDP的套接字类型。
 
 while True:
-    print('请按照格式输入：GET filename or POST filename xxxxxx')
-    msg = input('请输入：')
-    tcpCliSock.send(msg.encode())
-    data = tcpCliSock.recv(BUFSIZ)
-    if not data:
-        break
-    print(data.decode())
-tcpCliSock.close()
+    msg = input('客户端说：')    #输入数据
+    udpclisock.sendto(msg.encode('utf-8'), addc)
+    data, adds = udpclisock.recvfrom(bufsiz)
+    print('服务器回答：', data.decode('utf-8'))
+
+
+
+    
+udpclisock.close()
